@@ -1,0 +1,45 @@
+
+{
+	"connection":{
+		"siebel": {
+			"ip":"bcvm496",
+			"port":"2321",
+			"objmgr":"FINSObjMgr_rus",
+			"locale":"rus",
+			"user":"SADMIN",
+			"password":"SADMIN",
+			"enterprise":"SBA_81",
+			"server":"bcvm496"
+	  	},
+		"ssh": {
+			"ip":"bcvm496",
+			"port":"22",
+			"user":"siebel",
+			"password":"siebel"
+	  	},
+		"server": {
+			"ip": "bcvm496",
+			"port": "33333"
+		},
+		"mode": "tcp"
+	},
+	"BS":{
+	  "name":"TSC Dev Nightmare",
+	  "methods":[
+		"resetVariables",
+		"resetVariables2"
+	  ],
+	  "resetVariables": {
+	    "inputs": {
+	      "iterations":"1001",
+	      "count":"13"
+	    }
+	  },
+	  "resetVariables2": {
+	    "inputs": {
+	      "iterations":"1000",
+	      "count":"15"
+	    }
+	  }
+	}
+}
