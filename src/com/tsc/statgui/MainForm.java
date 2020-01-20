@@ -298,12 +298,14 @@ public class MainForm extends JFrame {
         Map<String, JSONArray> mems = new HashMap<>();
         for (String str : this.pids) {
             ((JSONObject) this.jobj.get(str)).put("memory", new JSONArray());
+            ((JSONObject) this.jobj.get(str)).put("annotation", new JSONArray());
         }
         for (String str : data.split(";")) {
             String[] info = str.split(":");
             if (info.length > 1) {
                 if (this.jobj.containsKey(info[0])) {
                     ((JSONArray) ((JSONObject) this.jobj.get(info[0])).get("memory")).add(info[1].replaceAll("m", ""));
+                    ((JSONArray) ((JSONObject) this.jobj.get(info[0])).get("annotation")).add(info[2]);
                 }
             }
         }
@@ -388,13 +390,16 @@ public class MainForm extends JFrame {
                     "      var data = new google.visualization.DataTable();\n" +
                     "      data.addColumn('number', \"Выборка\");\n" +
                     "      data.addColumn('number', 'Память после запуска');\n" +
+                    "      data.addColumn({type:'string', role:'annotation'}); \n" +
                     "\n" +
                     "      var dataSet = [];\n" +
                     "        \n" +
                     "\n" +
                     "        for( i = 0; i< obj.memory.length; i ++)\n" +
                     "        {\n" +
-                    "          dataSet[i] = [i, parseFloat(obj.memory[i])];\n" +
+                    "           if(obj.annotation[i] == '1') \n" +
+                    "               dataSet[i] = [i, parseFloat(obj.memory[i]), 'A'];\n" +
+                    "           else dataSet[i] = [i, parseFloat(obj.memory[i]), null];\n" +
                     "        }\n" +
                     "        data.addRows(dataSet);\n" +
                     "\n" +
